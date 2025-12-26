@@ -93,6 +93,16 @@
       background: rgba(255,255,255,.07);
       transform: translateY(-1px);
     }
+    .btn-balloon{
+      background: linear-gradient(135deg, rgba(144,238,144,.3), rgba(152,251,152,.3));
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      border-color: rgba(144,238,144,.5);
+    }
+    .btn-balloon:hover{
+      border-color: rgba(144,238,144,.7);
+      box-shadow: 0 18px 60px rgba(144,238,144,.15);
+      transform: translateY(-1px);
+    }
 
     header{
       position: sticky; top: 0; z-index: 200;
@@ -555,7 +565,7 @@
           </p>
 
           <div class="btn-row">
-            <a class="btn btn-primary" href="https://drive.google.com/file/d/1_YiO-MU_nC1VSr5FpjyqYHvAKVRH_vJk/view?usp=sharing" target="_blank" rel="noopener">فتح ملف الأسعار</a>
+            <a class="btn btn-balloon" href="https://drive.google.com/file/d/1_YiO-MU_nC1VSr5FpjyqYHvAKVRH_vJk/view?usp=sharing" target="_blank" rel="noopener">فتح ملف الأسعار</a>
             <a class="btn btn-ghost" href="https://example.com/wholesale" target="_blank" rel="noopener">صفحة أسعار الكميات</a>
           </div>
 
@@ -791,6 +801,27 @@
       update();
       const timer = setInterval(update, 1000);
     })();
+
+    // Image Slider
+    let slideIndex = 0;
+    function showSlides() {
+      const slides = document.querySelector('.slides');
+      const images = slides.querySelectorAll('img');
+      if (images.length === 0) return;
+      slideIndex = slideIndex < 0 ? images.length - 1 : slideIndex >= images.length ? 0 : slideIndex;
+      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+    function changeSlide(n) {
+      slideIndex += n;
+      showSlides();
+    }
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      slideIndex++;
+      showSlides();
+    }, 5000);
+    // Initial show
+    showSlides();
 
     // Christmas flyer dismiss + save state
     (function(){
