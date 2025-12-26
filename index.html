@@ -114,9 +114,7 @@
       display:flex; align-items:center; justify-content:space-between; gap:16px;
       padding: 14px 0;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-    }
+    .brand{ display:flex; align-items:center; gap:12px; }
     .logo{
       width:46px; height:46px;
       border-radius: 14px;
@@ -197,9 +195,7 @@
       font-weight: 900;
     }
 
-    main{
-      padding: 64px 0 28px;
-    }
+    main{ padding: 64px 0 28px; }
 
     .hero{
       border-radius: var(--radius);
@@ -233,6 +229,7 @@
       font-size: 1.05rem;
       margin-bottom: 18px;
     }
+
     .quick{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -266,9 +263,7 @@
       flex: 0 0 auto;
     }
 
-    .section{
-      padding: 42px 0;
-    }
+    .section{ padding: 42px 0; }
     .section-title{
       font-size: clamp(1.25rem, 1rem + 1.0vw, 1.9rem);
       font-weight: 900;
@@ -287,7 +282,6 @@
       box-shadow: 0 18px 40px rgba(0,0,0,.28);
       padding: 18px;
     }
-
     .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
 
     footer{
@@ -317,14 +311,10 @@
       .nav-actions .btn{ width:auto; }
     }
 
-    /* Grid utility classes for responsive sections */
     .grid{ display:grid; gap:12px; }
     .grid-2{ grid-template-columns: repeat(2, 1fr); }
     .grid-3{ grid-template-columns: repeat(3, 1fr); }
-
-    @media (max-width: 900px){
-      .grid-3{ grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 900px){ .grid-3{ grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 520px){
       .grid-2, .grid-3{ grid-template-columns: 1fr; }
       .panel{ padding: 12px; }
@@ -348,13 +338,12 @@
     }
     .count-num{ font-weight:900; font-size:1.25rem; color:var(--accent); }
     .count-label{ font-weight:800; color:var(--muted); font-size:.82rem; margin-top:4px; }
-
     @media (max-width:520px){
       .count-item{ min-width:64px; padding:10px; }
       .count-num{ font-size:1.05rem; }
     }
 
-    /* Social icons (small white icons, centered in footer) */
+    /* Social icons */
     .social-icons{ display:flex; gap:10px; justify-content:center; align-items:center; }
     .social-icon{
       width:44px; height:44px; border-radius:10px;
@@ -367,320 +356,68 @@
     .social-icon:hover{ transform: translateY(-3px); background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 10px 28px rgba(110,231,255,.06); }
     @media (max-width:520px){ .social-icon{ width:38px; height:38px; } }
 
-    /* Snow overlay (subtle drifting dots) */
+    /* ✅ Snow overlay: قللنا الثلج وخففنا الحركة */
     .snow{
-      position:fixed; inset:0; pointer-events:none; z-index:240; opacity:.16;
+      position:fixed; inset:0; pointer-events:none; z-index:240;
+      opacity:.08; /* كان .16 */
       background-image: radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1px);
-      background-size: 12px 12px;
-      animation: snow 22s linear infinite;
+      background-size: 18px 18px; /* كان 12px 12px (أكثر كثافة) */
+      animation: snow 55s linear infinite; /* كان 22s */
       mix-blend-mode: screen;
     }
     @keyframes snow{ from{ background-position:0 0 } to{ background-position:0 1200px } }
 
-    /* Flying snowflakes (animated elements) */
+    /* Flying snowflakes */
     .snowflake{
       position:fixed; top:-10vh; pointer-events:none; z-index:260; color:#fff;
-      font-size:18px; opacity:.92; will-change: transform, opacity;
+      font-size:18px; opacity:.85; will-change: transform, opacity;
       text-shadow: 0 6px 18px rgba(0,0,0,.35);
     }
     @keyframes fall{
       0%{ transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:0 }
-      10%{ opacity:.9 }
-      100%{ transform: translateY(110vh) translateX(40px) rotate(360deg); opacity:.9 }
+      10%{ opacity:.75 }
+      100%{ transform: translateY(110vh) translateX(24px) rotate(360deg); opacity:.75 }
     }
 
-    /* Fireworks for New Year */
-    .fireworks {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 250;
-    }
-    .firework {
-      position: absolute;
-      width: 4px;
-      height: 80px;
-      background: linear-gradient(to top, #ff6b35, #ffd700);
-      border-radius: 2px;
-      animation: launch 2s ease-out forwards;
-    }
-    .particle {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffd700, #ff6b35, #ff4757);
-      box-shadow: 0 0 10px #ffd700;
-      animation: explode 1.5s ease-out forwards;
-      transform-origin: center;
-    }
-    @keyframes launch {
-      0% { transform: translateY(100vh) scale(1); opacity: 1; }
-      50% { opacity: 1; }
-      100% { transform: translateY(0) scale(0.5); opacity: 0; }
-    }
-    @keyframes explode {
-      0% { transform: rotate(var(--angle)) translateY(0) scale(0); opacity: 1; }
-      50% { transform: rotate(var(--angle)) translateY(-100px) scale(1.2); opacity: 1; }
-      100% { transform: rotate(var(--angle)) translateY(-200px) scale(0); opacity: 0; }
-    }
+    /* Fireworks */
+    .fireworks { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:250; }
+    .firework { position:absolute; width:4px; height:80px; background: linear-gradient(to top, #ff6b35, #ffd700); border-radius:2px; animation: launch 2s ease-out forwards; }
+    .particle { position:absolute; width:8px; height:8px; border-radius:50%; background: radial-gradient(circle, #ffd700, #ff6b35, #ff4757); box-shadow: 0 0 10px #ffd700; animation: explode 1.5s ease-out forwards; transform-origin:center; }
+    @keyframes launch { 0%{ transform: translateY(100vh) scale(1); opacity:1 } 50%{ opacity:1 } 100%{ transform: translateY(0) scale(0.5); opacity:0 } }
+    @keyframes explode { 0%{ transform: rotate(var(--angle)) translateY(0) scale(0); opacity:1 } 50%{ transform: rotate(var(--angle)) translateY(-100px) scale(1.2); opacity:1 } 100%{ transform: rotate(var(--angle)) translateY(-200px) scale(0); opacity:0 } }
 
-    /* Balloons for New Year */
-    .balloons {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 200;
-    }
+    /* Balloons */
+    .balloons { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:200; }
     .balloon {
-      position: absolute;
-      bottom: -100px;
-      width: 34px;
-      height: 46px;
+      position:absolute; bottom:-100px; width:34px; height:46px;
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      animation: float 10s linear infinite;
+      animation: float 14s linear infinite; /* كان 10s */
       box-shadow: 0 16px 32px rgba(0,0,0,.18);
       opacity:.95;
     }
     .balloon::before {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 6px;
-      background: rgba(255,255,255,.35);
-      border-radius: 999px;
-      filter: blur(.1px);
+      content:''; position:absolute; bottom:-10px; left:50%; transform: translateX(-50%);
+      width:8px; height:6px; background: rgba(255,255,255,.35); border-radius:999px; filter: blur(.1px);
     }
-    .balloon::after{
-      content:"";
-      position:absolute;
-      bottom:-22px; left:50%;
-      transform: translateX(-50%);
-      width: 2px; height: 26px;
-      background: rgba(255,255,255,.35);
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); }
-      100% { transform: translateY(-120px) rotate(360deg); }
-    }
+    .balloon::after{ content:""; position:absolute; bottom:-22px; left:50%; transform: translateX(-50%); width:2px; height:26px; background: rgba(255,255,255,.35); }
+    @keyframes float { 0%{ transform: translateY(100vh) rotate(0deg); } 100%{ transform: translateY(-120px) rotate(360deg); } }
 
-    /* Sparkles for New Year */
-    .sparkles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 150;
-    }
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #ffd700;
-      border-radius: 50%;
-      box-shadow: 0 0 6px #ffd700;
-      animation: sparkle 2s ease-in-out infinite;
-    }
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; transform: scale(0); }
-      50% { opacity: 1; transform: scale(1); }
-    }
+    /* Sparkles */
+    .sparkles { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:150; }
+    .sparkle { position:absolute; width:4px; height:4px; background:#ffd700; border-radius:50%; box-shadow: 0 0 6px #ffd700; animation: sparkle 3.2s ease-in-out infinite; }
+    @keyframes sparkle { 0%,100%{ opacity:0; transform: scale(0); } 50%{ opacity:1; transform: scale(1); } }
 
-    /* Christmas flyer styles */
+    /* Christmas flyer */
     .xmas-flyer{ display:block; position:relative; overflow:visible; background: linear-gradient(180deg, rgba(239,68,68,.08), rgba(16,185,129,.04)); border:1px solid rgba(255,255,255,.06); }
     .xmas-close{ position:absolute; left:14px; top:10px; border:0; background:transparent; color:var(--muted); font-size:22px; cursor:pointer; padding:6px; border-radius:8px; }
     .xmas-close:focus{ outline:2px solid rgba(255,255,255,.08); }
-
-    @media (max-width:520px){
-      .xmas-flyer{ padding:12px; }
-      .xmas-close{ left:8px; top:6px; }
-    }
-
-    /* Garland decoration strip */
-    .garland{
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 6px;
-      height:44px;
-      width: min(720px, calc(100% - 64px));
-      border-radius: 999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      pointer-events:none;
-      z-index:300;
-      background: linear-gradient(90deg, rgba(16,185,129,.12), rgba(239,68,68,.12));
-      box-shadow: 0 8px 30px rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(10px);
-    }
-    .garland .orn{
-      width:12px; height:12px; border-radius:50%;
-      box-shadow:0 6px 18px rgba(0,0,0,.25);
-      animation: twinkle 2.6s ease-in-out infinite;
-    }
-    .garland .orn.green{ background: #34d399; }
-    .garland .orn.gold{ background: #f59e0b; }
-    .garland .orn.silver{ background: #c0c0c0; }
-    .garland .orn.blue{ background: #3b82f6; }
-
-    /* ===== New Year / Xmas Tree Decorations ===== */
-    .decor-stage{
-      position: relative;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      overflow: hidden;
-    }
-    .tree-wrap{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .tree{
-      position: relative;
-      width: 210px;
-      height: 260px;
-      margin: 6px auto 0;
-      filter: drop-shadow(0 18px 30px rgba(0,0,0,.35));
-      flex: 0 0 auto;
-    }
-    .tree .star{
-      position:absolute;
-      top:-18px; left:50%;
-      transform: translateX(-50%);
-      font-size: 26px;
-      text-shadow: 0 0 18px rgba(255,215,0,.45);
-      animation: starGlow 1.8s ease-in-out infinite;
-    }
-    @keyframes starGlow{
-      0%,100%{ transform:translateX(-50%) scale(1); opacity:.85; }
-      50%{ transform:translateX(-50%) scale(1.12); opacity:1; }
-    }
-    .tree .layer{
-      position:absolute;
-      left:50%;
-      transform: translateX(-50%);
-      width: 0; height: 0;
-      border-left: 105px solid transparent;
-      border-right: 105px solid transparent;
-      border-bottom: 86px solid rgba(16,185,129,.92);
-      border-radius: 12px;
-    }
-    .tree .l1{ top: 18px;  border-left-width: 92px; border-right-width: 92px; border-bottom-width: 76px; }
-    .tree .l2{ top: 62px;  border-left-width: 102px; border-right-width: 102px; border-bottom-width: 86px; opacity:.95; }
-    .tree .l3{ top: 112px; border-left-width: 112px; border-right-width: 112px; border-bottom-width: 96px; opacity:.92; }
-
-    .tree .trunk{
-      position:absolute;
-      bottom: 0; left:50%;
-      transform: translateX(-50%);
-      width: 46px; height: 54px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, #8b5a2b, #5a3a1a);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-
-    .ornament{
-      position:absolute;
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #ff4757);
-      box-shadow: 0 0 10px rgba(255,215,0,.18);
-      border: 1px solid rgba(255,255,255,.22);
-      animation: twinkle 2.4s ease-in-out infinite;
-      opacity:.95;
-    }
-
-    .tree-garland{
-      position:absolute;
-      left:50%;
-      top: 88px;
-      transform: translateX(-50%) rotate(-2deg);
-      width: 180px;
-      height: 60px;
-      border: 2px dashed rgba(255,215,0,.35);
-      border-color: rgba(255,215,0,.35) transparent transparent transparent;
-      border-radius: 999px;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.25));
-      pointer-events:none;
-    }
-
-    .gifts{
-      display:flex;
-      gap:10px;
-      align-items:flex-end;
-      justify-content:center;
-      flex:1;
-      min-width: 240px;
-    }
-    .gift{
-      width: 82px; height: 64px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(135deg, rgba(255,215,0,.16), rgba(192,192,192,.10));
-      box-shadow: 0 14px 30px rgba(0,0,0,.28);
-      position:relative;
-      overflow:hidden;
-    }
-    .gift::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, rgba(239,68,68,.55) 0 22%, transparent 22% 78%, rgba(239,68,68,.55) 78% 100%);
-      opacity:.55;
-    }
-    .gift::after{
-      content:"";
-      position:absolute;
-      left:0; right:0; top:26px;
-      height: 12px;
-      background: rgba(239,68,68,.55);
-      opacity:.55;
-    }
-    .gift .bow{
-      position:absolute;
-      top:10px; left:50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,.25));
-    }
-
-    @media (max-width:520px){
-      .tree{ width: 180px; height: 240px; }
-      .gifts{ min-width: 200px; }
-      .gift{ width: 74px; height: 58px; }
-    }
+    @media (max-width:520px){ .xmas-flyer{ padding:12px; } .xmas-close{ left:8px; top:6px; } }
   </style>
 </head>
 
 <body>
 
-  <!-- Garland (FIXED: inside body) -->
-  <div class="garland" aria-hidden="true">
-    <span class="orn gold"></span>
-    <span class="orn silver"></span>
-    <span class="orn blue"></span>
-    <span class="orn silver"></span>
-    <span class="orn gold"></span>
-  </div>
+  <!-- ✅ (تم حذف شريط الزينة العلوي garland بالكامل) -->
 
   <!-- HEADER -->
   <header>
@@ -741,33 +478,7 @@
             <a class="btn btn-ghost" href="#offers">شوف العروض</a>
           </div>
 
-          <!-- ✅ New Year / Xmas decorations added -->
-          <div class="decor-stage reveal" aria-label="زينة رأس السنة">
-            <div class="tree-wrap">
-              <div class="tree" aria-hidden="true">
-                <div class="star">⭐</div>
-
-                <div class="layer l1"></div>
-                <div class="layer l2"></div>
-                <div class="layer l3"></div>
-                <div class="tree-garland"></div>
-                <div class="trunk"></div>
-
-                <span class="ornament" style="top:70px; left:48%; background: radial-gradient(circle at 30% 30%, #fff, #3b82f6);"></span>
-                <span class="ornament" style="top:92px; left:38%; background: radial-gradient(circle at 30% 30%, #fff, #ff4757); animation-delay:.4s;"></span>
-                <span class="ornament" style="top:98px; left:58%; background: radial-gradient(circle at 30% 30%, #fff, #f59e0b); animation-delay:.8s;"></span>
-                <span class="ornament" style="top:130px; left:33%; background: radial-gradient(circle at 30% 30%, #fff, #c0c0c0); animation-delay:.2s;"></span>
-                <span class="ornament" style="top:142px; left:64%; background: radial-gradient(circle at 30% 30%, #fff, #10b981); animation-delay:1s;"></span>
-                <span class="ornament" style="top:166px; left:48%; background: radial-gradient(circle at 30% 30%, #fff, #a78bfa); animation-delay:1.4s;"></span>
-              </div>
-
-              <div class="gifts" aria-hidden="true">
-                <div class="gift"><div class="bow">🎀</div></div>
-                <div class="gift"><div class="bow">🎀</div></div>
-                <div class="gift"><div class="bow">🎀</div></div>
-              </div>
-            </div>
-          </div>
+          <!-- ✅ (تم حذف شجرة الكرسمس/الزينة بالكامل) -->
 
           <div id="buttons" class="quick" style="margin-top:18px;">
             <a class="reveal" href="https://t.me/silver_300" target="_blank" rel="noopener">
@@ -884,7 +595,6 @@
 
       <!-- OFFERS -->
       <section class="section">
-        <!-- Countdown to New Year -->
         <div id="countdown" class="countdown reveal" aria-live="polite">
           <div class="count-item">
             <div class="count-num" id="cd-days">00</div>
@@ -906,9 +616,7 @@
 
         <div id="offers" class="panel reveal">
           <h3 class="section-title">العروض المتوفرة</h3>
-          <p class="section-sub">
-            لحكو على عروض راس السنة قبل لا تخلص .
-          </p>
+          <p class="section-sub">لحكو على عروض راس السنة قبل لا تخلص .</p>
 
           <div class="grid grid-3">
             <div class="panel" style="padding:14px;">
@@ -1009,7 +717,6 @@
       burger.setAttribute("aria-expanded", String(!isOpen));
     });
 
-    // Close mobile menu on link click
     mobileMenu.querySelectorAll("a").forEach(a=>{
       a.addEventListener("click", ()=>{
         mobileMenu.style.display = "none";
@@ -1077,26 +784,26 @@
       });
     })();
 
-    // Create falling snowflakes dynamically
+    // ✅ Snowflakes أقل + أبطأ
     (function makeSnow(){
-      const count = 50;
+      const count = 18; // كان 50
       const body = document.body;
       for(let i=0;i<count;i++){
         const s = document.createElement('span');
         s.className = 'snowflake';
         s.textContent = '❄';
-        const size = Math.random()*8 + 6;
+        const size = Math.random()*7 + 6;
         s.style.fontSize = size + 'px';
         s.style.left = Math.random()*100 + '%';
-        const dur = Math.random()*20 + 20;
+        const dur = Math.random()*18 + 34; // 34-52s (أبطأ)
         const delay = -(Math.random()*30);
         s.style.animation = `fall ${dur}s linear ${delay}s infinite`;
-        s.style.opacity = (Math.random()*0.3 + 0.4).toFixed(2);
+        s.style.opacity = (Math.random()*0.25 + 0.35).toFixed(2);
         body.appendChild(s);
       }
     })();
 
-    // Fireworks
+    // ✅ Fireworks أبطأ (بدال 10 ثواني)
     (function launchFireworks(){
       const fireworks = document.getElementById('fireworks');
       if(!fireworks) return;
@@ -1122,11 +829,11 @@
         }, 2000);
       }
 
-      setInterval(createFirework, 10000);
-      for (let i = 0; i < 3; i++) setTimeout(createFirework, i * 2000);
+      setInterval(createFirework, 16000); // كان 10000
+      for (let i = 0; i < 2; i++) setTimeout(createFirework, i * 2500);
     })();
 
-    // ✅ Improved Balloons (softer + nicer)
+    // ✅ Balloons أقل + أبطأ
     (function launchBalloons(){
       const balloons = document.getElementById('balloons');
       if(!balloons) return;
@@ -1138,7 +845,7 @@
         balloon.className = 'balloon';
         balloon.style.left = Math.random() * 100 + '%';
 
-        const dur = Math.random()*8 + 10; // 10-18s
+        const dur = Math.random()*10 + 16; // 16-26s (أبطأ)
         balloon.style.animationDuration = dur + 's';
         balloon.style.animationDelay = (Math.random()*2) + 's';
 
@@ -1149,8 +856,8 @@
         setTimeout(() => balloon.remove(), (dur+2)*1000);
       }
 
-      setInterval(createBalloon, 2500);
-      for (let i = 0; i < 8; i++) setTimeout(createBalloon, i * 600);
+      setInterval(createBalloon, 5200); // كان 2500
+      for (let i = 0; i < 5; i++) setTimeout(createBalloon, i * 900);
     })();
 
     // Sparkles
@@ -1158,7 +865,7 @@
       const sparkles = document.getElementById('sparkles');
       if(!sparkles) return;
 
-      for(let i=0; i<30; i++){
+      for(let i=0; i<22; i++){ // كان 30
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         sparkle.style.left = Math.random()*100 + '%';
