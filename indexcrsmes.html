@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>كوزمتك سلفر | الصفحة الرسمية</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.085);
+      --text: #e9eef7;
+      --muted: rgba(233,238,247,.72);
+      --border: rgba(255,255,255,.12);
+
+      /* New Year accents: gold + silver */
+      --accent: #ffd700; /* gold */
+      --accent-2: #c0c0c0; /* silver */
+      --good: #34d399;
+
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --max: 1000px;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
+    body{
+      background: radial-gradient(900px 550px at 80% 10%, rgba(110,231,255,.12), transparent 55%),
+                  radial-gradient(900px 550px at 15% 25%, rgba(167,139,250,.12), transparent 55%),
+                  linear-gradient(180deg, #070a10, var(--bg));
+      color: var(--text);
+      font-family: "Cairo","Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      line-height: 1.75;
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+
+    .container{ width:min(var(--max), calc(100% - 32px)); margin:0 auto; }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight:800;
+      letter-spacing:.2px;
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(110,231,255,.35);
+      flex:0 0 auto;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      border: 1px solid var(--border);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(110,231,255,.22), rgba(167,139,250,.22));
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .btn-primary:hover{
+      border-color: rgba(110,231,255,.35);
+      box-shadow: 0 18px 60px rgba(110,231,255,.10);
+      transform: translateY(-1px);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.04);
+    }
+    .btn-ghost:hover{
+      background: rgba(255,255,255,.07);
+      transform: translateY(-1px);
+    }
+
+    header{
+      position: sticky; top: 0; z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(7,10,16,.65);
+      backdrop-filter: blur(14px);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:46px; height:46px;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      color: rgba(233,238,247,.92);
+    }
+    .brand h1{
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: .3px;
+      margin:0;
+    }
+    .brand p{
+      margin-top: 2px;
+      font-size: .86rem;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .nav-links{
+      display:flex; align-items:center; gap:10px;
+    }
+    .nav-links a{
+      color: rgba(233,238,247,.86);
+      font-weight: 900;
+      font-size: .95rem;
+      padding: 10px 10px;
+      border-radius: 10px;
+      transition: background .18s ease, color .18s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(255,255,255,.06);
+      color: #fff;
+    }
+
+    .nav-actions{
+      display:flex; align-items:center; gap:10px;
+      justify-content:flex-end;
+    }
+
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      align-items:center; justify-content:center;
+      cursor:pointer;
+      transition: background .18s ease, transform .18s ease;
+    }
+    .burger:hover{ background: rgba(255,255,255,.07); transform: translateY(-1px); }
+    .burger span{
+      width:18px; height:2px; background: #fff; position:relative; display:block; border-radius:99px;
+    }
+    .burger span::before,.burger span::after{
+      content:""; position:absolute; left:0; width:18px; height:2px; background:#fff; border-radius:99px;
+    }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top:6px; }
+
+    .mobile-menu{
+      display:none;
+      padding: 10px 0 16px;
+    }
+    .mobile-menu a{
+      display:block;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      margin: 8px 0;
+      font-weight: 900;
+    }
+
+    main{
+      padding: 64px 0 28px;
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      padding: 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    /* Garland decoration above header/hero */
+    .garland{
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: 6px; height:44px; width: min(720px, calc(100% - 64px));
+      border-radius: 999px; display:flex; align-items:center; justify-content:center;
+      gap:10px; pointer-events:none; z-index:250;
+      background: linear-gradient(90deg, rgba(16,185,129,.12), rgba(239,68,68,.12));
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+    .garland .orn{
+      width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 6px 18px rgba(239,68,68,.14);
+    }
+    .garland .orn.green{ background: var(--accent-2); box-shadow:0 6px 18px rgba(16,185,129,.12); }
+    .garland .orn.gold{ background: #f59e0b; box-shadow:0 6px 18px rgba(245,158,11,.12); }
+    .garland .orn.silver{ background: #c0c0c0; box-shadow:0 6px 18px rgba(192,192,192,.12); }
+    .garland .orn.blue{ background: #3b82f6; box-shadow:0 6px 18px rgba(59,130,246,.12); }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(520px 220px at 20% 0%, rgba(110,231,255,.18), transparent 60%),
+                  radial-gradient(520px 260px at 85% 10%, rgba(167,139,250,.16), transparent 60%);
+      pointer-events:none;
+      opacity: .9;
+    }
+    .hero-content{ position:relative; }
+    .hero h2{
+      font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 14px 0 12px;
+      letter-spacing: .2px;
+    }
+    .hero p{
+      color: var(--muted);
+      font-weight: 700;
+      max-width: 760px;
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+    }
+    .quick{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .quick a{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight: 900;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .quick a:hover{
+      transform: translateY(-4px);
+      border-color: rgba(110,231,255,.28);
+      background: linear-gradient(180deg, rgba(110,231,255,.09), rgba(255,255,255,.03));
+    }
+    .ico{
+      width:38px; height:38px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 1.15rem;
+      flex: 0 0 auto;
+    }
+
+    .section{
+      padding: 42px 0;
+    }
+    .section-title{
+      font-size: clamp(1.25rem, 1rem + 1.0vw, 1.9rem);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .section-sub{
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 40px rgba(0,0,0,.28);
+      padding: 18px;
+    }
+
+    .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+
+    footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(7,10,16,.65);
+      backdrop-filter: blur(14px);
+      padding: 22px 0;
+      color: var(--muted);
+      margin-top: 30px;
+    }
+    .footer-row{
+      display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
+    }
+
+    .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.show{ opacity:1; transform: translateY(0); }
+
+    @media (max-width: 980px){
+      .nav-links{ display:none; }
+      .burger{ display:flex; }
+      .quick{ grid-template-columns: 1fr 1fr; }
+      .hero{ padding: 20px; }
+    }
+    @media (max-width: 520px){
+      .quick{ grid-template-columns: 1fr; }
+      .btn{ width:100%; }
+      .nav-actions .btn{ width:auto; }
+    }
+
+    /* Grid utility classes for responsive sections */
+    .grid{ display:grid; gap:12px; }
+    .grid-2{ grid-template-columns: repeat(2, 1fr); }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
+
+    @media (max-width: 900px){
+      .grid-3{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px){
+      .grid-2, .grid-3{ grid-template-columns: 1fr; }
+      .panel{ padding: 12px; }
+      .hero{ padding: 16px; }
+      .brand h1{ font-size: 1rem; }
+      .brand p{ display:none; }
+      .btn{ padding:14px 16px; }
+    }
+
+    /* Countdown styles */
+    .countdown{
+      display:flex; gap:10px; justify-content:center; align-items:center;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+    .count-item{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      padding:10px 14px; border-radius:12px; min-width:72px;
+      text-align:center;
+    }
+    .count-num{ font-weight:900; font-size:1.25rem; color:var(--accent); }
+    .count-label{ font-weight:800; color:var(--muted); font-size:.82rem; margin-top:4px; }
+
+    @media (max-width:520px){
+      .count-item{ min-width:64px; padding:10px; }
+      .count-num{ font-size:1.05rem; }
+    }
+
+    /* footer social buttons are integrated with site buttons (kept as regular .btn styles) */
+
+    /* Social icons (small white icons, centered in footer) */
+    .social-icons{ display:flex; gap:10px; justify-content:center; align-items:center; }
+    .social-icon{
+      width:44px; height:44px; border-radius:10px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      transition: transform .14s ease, background .14s ease, box-shadow .14s ease;
+    }
+    .social-icon svg{ width:18px; height:18px; fill:#fff; }
+    .social-icon:hover{ transform: translateY(-3px); background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 10px 28px rgba(110,231,255,.06); }
+    @media (max-width:520px){ .social-icon{ width:38px; height:38px; } }
+
+    /* Snow overlay (subtle drifting dots) */
+    .snow{
+      position:fixed; inset:0; pointer-events:none; z-index:240; opacity:.16;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.95) 1px, transparent 1px);
+      background-size: 12px 12px;
+      animation: snow 22s linear infinite;
+      mix-blend-mode: screen;
+    }
+    @keyframes snow{ from{ background-position:0 0 } to{ background-position:0 1200px } }
+
+    /* Flying snowflakes (animated elements) */
+    .snowflake{
+      position:fixed; top:-10vh; pointer-events:none; z-index:260; color:#fff;
+      font-size:18px; opacity:.92; will-change: transform, opacity;
+      text-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+    @keyframes fall{
+      0%{ transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:0 }
+      10%{ opacity:.9 }
+      100%{ transform: translateY(110vh) translateX(40px) rotate(360deg); opacity:.9 }
+    }
+
+    /* Fireworks for New Year */
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 250;
+    }
+    .firework {
+      position: absolute;
+      width: 4px;
+      height: 80px;
+      background: linear-gradient(to top, #ff6b35, #ffd700);
+      border-radius: 2px;
+      animation: launch 2s ease-out forwards;
+    }
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffd700, #ff6b35, #ff4757);
+      box-shadow: 0 0 10px #ffd700;
+      animation: explode 1.5s ease-out forwards;
+      transform-origin: center;
+    }
+    @keyframes launch {
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      50% { opacity: 1; }
+      100% { transform: translateY(0) scale(0.5); opacity: 0; }
+    }
+    @keyframes explode {
+      0% { transform: rotate(var(--angle)) translateY(0) scale(0); opacity: 1; }
+      50% { transform: rotate(var(--angle)) translateY(-100px) scale(1.2); opacity: 1; }
+      100% { transform: rotate(var(--angle)) translateY(-200px) scale(0); opacity: 0; }
+    }
+
+    /* Christmas flyer styles */
+    .xmas-flyer{ display:block; position:relative; overflow:visible; background: linear-gradient(180deg, rgba(239,68,68,.08), rgba(16,185,129,.04)); border:1px solid rgba(255,255,255,.06); }
+    .xmas-close{ position:absolute; left:14px; top:10px; border:0; background:transparent; color:var(--muted); font-size:22px; cursor:pointer; padding:6px; border-radius:8px; }
+    .xmas-close:focus{ outline:2px solid rgba(255,255,255,.08); }
+
+    @media (max-width:520px){
+      .xmas-flyer{ padding:12px; }
+      .xmas-close{ left:8px; top:6px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="كوزمتك سلفر">
+        <div class="logo">
+  <img src="images/logo.png" alt="Cosmetic Silver Logo">
+</div>
+
+        <div>
+          <h1>مجموعة محلات سلفر</h1>
+          <p>كل المنتجات • جملة • تحديثات يومية</p>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="#buttons">الأزرار</a>
+        <a href="#prices">الأسعار</a>
+        <a href="#locations">المواقع</a>
+        <a href="#offers">العروض</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#contact">اتصل بينا</a>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container mobile-menu" id="mobileMenu" aria-label="قائمة الهاتف">
+      <a href="#buttons">الأزرار</a>
+      <a href="#prices">الأسعار</a>
+      <a href="#locations">المواقع</a>
+      <a href="#offers">العروض</a>
+      <a href="#contact">اتصل بينا</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top">
+    <div class="container">
+      <section class="hero reveal">
+        <div class="hero-content">
+          <span class="badge"><span class="dot"></span>الصفحة الرسمية لـ كوزمتك سلفر</span>
+
+          <h2>
+            أهلاً بيك بـ <span style="background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">كوزمتك سلفر</span>
+          </h2>
+
+          <p>
+           لتجارة العطور ومستحضرات التجميل والمكياج بالجملة  :
+           تزويد المحلات التجارية ومراكز التجميل والمذاخر والصيدليات والمجمعات والمشاريع الصغيرة و الكبيرة
+          </p>
+
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#buttons">ابدأ من الأزرار</a>
+            <a class="btn btn-ghost" href="#offers">شوف العروض</a>
+          </div>
+
+          <div id="buttons" class="quick" style="margin-top:18px;">
+            <!-- عدّل الروابط حسب حساباتك -->
+            <a class="reveal" href="https://t.me/silver_300" target="_blank" rel="noopener">
+              <span>قناة التلكرام</span>
+              <span class="ico">📣</span>
+            </a>
+            <a class="reveal" href="#prices">
+              <span>مشاهدة الأسعار</span>
+              <span class="ico">💲</span>
+            </a>
+            <a class="reveal" href="#locations">
+              <span>تفاصيل المواقع</span>
+              <span class="ico">📍</span>
+            </a>
+            <a class="reveal" href="#offers">
+              <span>العروض المتوفرة</span>
+              <span class="ico">🔥</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Christmas flyer/banner -->
+      <section class="section">
+        <div id="xmasFlyer" class="panel reveal xmas-flyer" role="region" aria-label="نشرة الكريسماس">
+          <button id="closeFlyer" class="xmas-close" aria-label="إغلاق النشرة">×</button>
+          <div style="display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap;">
+            <div style="flex:1; min-width:200px;">
+              <h3 style="margin:0; font-size:1.25rem; font-weight:900;">نشرة رأس السنة 🎉</h3>
+              <p style="margin:6px 0 0; color:var(--muted); font-weight:700;">خصومات رأس السنة على المنتجات المحددة — لفترة محدودة!</p>
+            </div>
+            <div style="flex:0 0 auto;">
+              <a class="btn btn-primary" href="#offers">شوف العروض</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICES -->
+      <section class="section">
+        <div id="prices" class="panel reveal">
+          <h3 class="section-title">مشاهدة الأسعار</h3>
+          <p class="section-sub">
+            هنا تخلي زر واحد يفتح ملف الأسعار (PDF/Google Sheet) أو صفحة أسعار داخل نفس الموقع.
+          </p>
+
+          <div class="btn-row">
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1_YiO-MU_nC1VSr5FpjyqYHvAKVRH_vJk/view?usp=sharing" target="_blank" rel="noopener">فتح ملف الأسعار</a>
+            <a class="btn btn-ghost" href="https://example.com/wholesale" target="_blank" rel="noopener">صفحة أسعار الكميات</a>
+          </div>
+
+          <p style="margin-top:12px; color:var(--muted); font-weight:700;">
+            ملاحظة: تحديث الاسعار يتم بشكل يومي حسب التاريخ الحالي 
+          </p>
+        </div>
+      </section>
+
+      <!-- LOCATIONS -->
+      <section class="section">
+        <div id="locations" class="panel reveal">
+          <h3 class="section-title">تفاصيل المواقع</h3>
+          <p class="section-sub">
+           جميع فروع مجموعة محلات سلفر في بغداد
+          </p>
+
+          <div class="grid grid-2">
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">الفرع 1</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">
+                 بغداد - جكوك - قرب محطة الوقود
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-ghost" href="https://maps.app.goo.gl/PTKFUtUR4KjugsPq6" target="_blank" rel="noopener">فتح الخريطة</a>
+                <a class="btn btn-primary" href="https://wa.me/9647714634173?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%201" target="_blank" rel="noopener">واتساب الفرع</a>
+              </div>
+            </div>
+
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">الفرع 2</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">
+                الشورجة - مقابل الباب الخلفي لعمارة راميتا
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-ghost" href="https://maps.app.goo.gl/wjVfL4zQ8uagKxrM9" target="_blank" rel="noopener">فتح الخريطة</a>
+                <a class="btn btn-primary" href="https://wa.me/9647712342362?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%202" target="_blank" rel="noopener">واتساب الفرع</a>
+              </div>
+            </div>
+
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">الفرع 3</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">
+                الشورجة - مقابل كراج سوق العربي 
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-ghost" href="https://maps.app.goo.gl/vdkhVHmayJneFQBj6" target="_blank" rel="noopener">فتح الخريطة</a>
+                <a class="btn btn-primary" href="https://wa.me/9647700119572?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%203" target="_blank" rel="noopener">واتساب الفرع</a>
+              </div>
+            </div>
+
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">الفرع 4</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">
+                الشورجة - عمارة مريم - الطابق الاول
+              </p>
+              <div class="btn-row">
+                <a class="btn btn-ghost" href="https://maps.app.goo.gl/DEj1LHcCV4WV12wu9" target="_blank" rel="noopener">فتح الخريطة</a>
+                <a class="btn btn-primary" href="https://wa.me/96407721285882?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%204" target="_blank" rel="noopener">واتساب الفرع</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- OFFERS -->
+      <section class="section">
+          <!-- Countdown to New Year -->
+          <div id="countdown" class="countdown reveal" aria-live="polite">
+            <div class="count-item">
+              <div class="count-num" id="cd-days">00</div>
+              <div class="count-label">يوم</div>
+            </div>
+            <div class="count-item">
+              <div class="count-num" id="cd-hours">00</div>
+              <div class="count-label">ساعة</div>
+            </div>
+            <div class="count-item">
+              <div class="count-num" id="cd-mins">00</div>
+              <div class="count-label">دقيقة</div>
+            </div>
+            <div class="count-item">
+              <div class="count-num" id="cd-secs">00</div>
+              <div class="count-label">ثانية</div>
+            </div>
+          </div>
+        <div id="offers" class="panel reveal">
+          <h3 class="section-title">العروض المتوفرة</h3>
+          <p class="section-sub">
+            لحكو على عروض راس السنة قبل لا تخلص .
+          </p>
+
+          <div class="grid grid-3">
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">عرض 1 🔥</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">سعر صرف الدولار 1400 دينار عراقي .</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="https://drive.google.com/file/d/1aQv1md3h-CaoPEsy_TOdGouYhDN7U-KP/view?usp=sharing" target="_blank" rel="noopener">تفاصيل العرض</a>
+              </div>
+            </div>
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">عرض 2 🎁</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">توصيل مجانا لجميع محافظات العراق .</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="https://drive.google.com/file/d/1VSlq4xjjW8OAqQ4sYQeoc3WkJHsmZysl/view?usp=sharing" target="_blank" rel="noopener">تفاصيل العرض</a>
+              </div>
+            </div>
+            <div class="panel" style="padding:14px;">
+              <b style="font-weight:900;">عرض 3 ⭐</b>
+              <p style="color:var(--muted); font-weight:700; margin-top:6px;">كود خصم على قسم المنتجات  .</p>
+              <div class="btn-row">
+                <a class="btn btn-primary" href="https://almowafir.com/" target="_blank" rel="noopener">تفاصيل العرض</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="panel reveal">
+          <h3 class="section-title">اتصل بينا</h3>
+          <p class="section-sub">للحجز والطلب والتفاصيل تواصل  (واتساب / تيليجرام).</p>
+
+          <div class="btn-row">
+            <!-- عدّل رقم الواتساب -->
+            <a class="btn btn-primary" href="https://wa.me/9647714634173" target="_blank" rel="noopener">واتساب</a>
+            <a class="btn btn-ghost" href="https://t.me/silver_co1" target="_blank" rel="noopener">تيليجرام</a>
+          </div>
+
+          <p style="margin-top:10px; color:var(--muted); font-weight:700;">
+            © <span id="year"></span> كوزمتك سلفر — جميع الحقوق محفوظة
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>كوزمتك سلفر • صفحة روابط رسمية</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; flex-direction:column;">
+        <a class="btn btn-ghost" href="#top">رجوع للأعلى</a>
+
+        <div class="social-icons" style="margin-top:10px;">
+          <a class="social-icon" href="https://facebook.com/yourpage" target="_blank" rel="noopener" aria-label="فيسبوك" title="فيسبوك">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2h-3a4 4 0 00-4 4v3H8v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" fill="#fff"/></svg>
+          </a>
+
+          <a class="social-icon" href="https://t.me/yourpage" target="_blank" rel="noopener" aria-label="تيليجرام" title="تيليجرام">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.5 3.5L3.5 10.5l4.5 1.6L9 21l3-2 3 2 5-13.5L21.5 3.5z" fill="#fff"/></svg>
+          </a>
+
+          <a class="social-icon" href="https://wa.me/9647714634173" target="_blank" rel="noopener" aria-label="واتساب" title="واتساب">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.5 3.5A10.5 10.5 0 1013 20.9L11.5 21l.4-1.6A10.5 10.5 0 0020.5 3.5zM12 17.8c-1.7 0-3.3-.5-4.7-1.4l-.7-.4 1.3-1.3c.6.3 1.6.8 2.1 1 .9.4 1.9.7 2.9.7.6 0 1.1 0 1.6-.1l.2.9c-1.1.2-2.3.4-3.7.4z" fill="#fff"/></svg>
+          </a>
+
+          <a class="social-icon" href="https://instagram.com/yourpage" target="_blank" rel="noopener" aria-label="انستجرام" title="انستجرام">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.2" fill="none"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    burger.addEventListener("click", () => {
+      const isOpen = mobileMenu.style.display === "block";
+      mobileMenu.style.display = isOpen ? "none" : "block";
+      burger.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click", ()=>{
+        mobileMenu.style.display = "none";
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el=> io.observe(el));
+
+    // Countdown to start of next year (end of this year)
+    (function initCountdown(){
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
+      const container = document.getElementById('countdown');
+
+      function pad(n){ return String(n).padStart(2,'0'); }
+
+      function update(){
+        const now = new Date();
+        const target = new Date(now.getFullYear()+1, 0, 1); // Jan 1 next year 00:00
+        const diff = target - now;
+        if(diff <= 0){
+          clearInterval(timer);
+          if(container) container.innerHTML = '<div style="text-align:center;font-weight:900;color:var(--accent);">انتهى العدّ التنازلي</div>';
+          return;
+        }
+        const s = Math.floor(diff/1000);
+        const days = Math.floor(s / 86400);
+        const hours = Math.floor((s % 86400) / 3600);
+        const mins = Math.floor((s % 3600) / 60);
+        const secs = s % 60;
+
+        if(daysEl) daysEl.textContent = days;
+        if(hoursEl) hoursEl.textContent = pad(hours);
+        if(minsEl) minsEl.textContent = pad(mins);
+        if(secsEl) secsEl.textContent = pad(secs);
+      }
+
+      update();
+      const timer = setInterval(update, 1000);
+    })();
+
+    // Christmas flyer dismiss + save state
+    (function(){
+      const flyer = document.getElementById('xmasFlyer');
+      const close = document.getElementById('closeFlyer');
+      if(!flyer || !close) return;
+      // hide if previously closed
+      if(localStorage.getItem('xmasFlyerClosed') === '1') flyer.style.display = 'none';
+      close.addEventListener('click', ()=>{
+        flyer.style.display = 'none';
+        localStorage.setItem('xmasFlyerClosed','1');
+      });
+    })();
+
+    // Create falling snowflakes dynamically
+    (function makeSnow(){
+      const count = 26; // number of flakes
+      const body = document.body;
+      for(let i=0;i<count;i++){
+        const s = document.createElement('span');
+        s.className = 'snowflake';
+        s.textContent = '❄';
+        const size = Math.random()*12 + 10; // 10-22px
+        s.style.fontSize = size + 'px';
+        s.style.left = Math.random()*100 + '%';
+        const dur = Math.random()*14 + 8; // 8-22s
+        const delay = -(Math.random()*20);
+        s.style.animation = `fall ${dur}s linear ${delay}s infinite`;
+        s.style.opacity = (Math.random()*0.5 + 0.6).toFixed(2);
+        body.appendChild(s);
+      }
+    })();
+
+    // Fireworks for New Year
+    (function launchFireworks(){
+      const fireworks = document.getElementById('fireworks');
+      function createFirework(){
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = Math.random() * 100 + '%';
+        fireworks.appendChild(firework);
+        setTimeout(() => {
+          // Create particles
+          for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = firework.style.left;
+            particle.style.top = '20%';
+            particle.style.setProperty('--angle', (i * 18) + 'deg');
+            particle.style.animationDelay = Math.random() * 0.5 + 's';
+            fireworks.appendChild(particle);
+            setTimeout(() => particle.remove(), 2000);
+          }
+          firework.remove();
+        }, 2000);
+      }
+      // Launch fireworks every 10 seconds
+      setInterval(createFirework, 10000);
+      // Launch a few on load
+      for (let i = 0; i < 3; i++) {
+        setTimeout(createFirework, i * 2000);
+      }
+    })();
+  </script>
+
+  <!-- Fireworks for New Year -->
+  <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+
+</body>
+
+  <!-- Snow overlay for Christmas theme -->
+  <div class="snow" aria-hidden="true"></div>
+
+</html>
+
+    <div class="garland" aria-hidden="true">
+      <span class="orn gold"></span>
+      <span class="orn silver"></span>
+      <span class="orn blue"></span>
+      <span class="orn silver"></span>
+      <span class="orn gold"></span>
+    </div>
