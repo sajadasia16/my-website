@@ -444,6 +444,64 @@
       100% { transform: rotate(var(--angle)) translateY(-200px) scale(0); opacity: 0; }
     }
 
+    /* Balloons for New Year */
+    .balloons {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 30px;
+      height: 40px;
+      background: radial-gradient(circle at 50% 30%, #ff6b35, #ff4757);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: float 10s linear infinite;
+    }
+    .balloon::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background: #333;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    /* Sparkles for New Year */
+    .sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 150;
+    }
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ffd700;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #ffd700;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
     /* Christmas flyer styles */
     .xmas-flyer{ display:block; position:relative; overflow:visible; background: linear-gradient(180deg, rgba(239,68,68,.08), rgba(16,185,129,.04)); border:1px solid rgba(255,255,255,.06); }
     .xmas-close{ position:absolute; left:14px; top:10px; border:0; background:transparent; color:var(--muted); font-size:22px; cursor:pointer; padding:6px; border-radius:8px; }
@@ -838,19 +896,19 @@
 
     // Create falling snowflakes dynamically
     (function makeSnow(){
-      const count = 26; // number of flakes
+      const count = 50; // increased number for more gentle snow
       const body = document.body;
       for(let i=0;i<count;i++){
         const s = document.createElement('span');
         s.className = 'snowflake';
         s.textContent = '❄';
-        const size = Math.random()*12 + 10; // 10-22px
+        const size = Math.random()*8 + 6; // smaller size 6-14px for gentler look
         s.style.fontSize = size + 'px';
         s.style.left = Math.random()*100 + '%';
-        const dur = Math.random()*14 + 8; // 8-22s
-        const delay = -(Math.random()*20);
+        const dur = Math.random()*20 + 20; // slower fall: 20-40s
+        const delay = -(Math.random()*30);
         s.style.animation = `fall ${dur}s linear ${delay}s infinite`;
-        s.style.opacity = (Math.random()*0.5 + 0.6).toFixed(2);
+        s.style.opacity = (Math.random()*0.3 + 0.4).toFixed(2); // more transparent
         body.appendChild(s);
       }
     })();
@@ -885,10 +943,50 @@
         setTimeout(createFirework, i * 2000);
       }
     })();
+
+    // Balloons for New Year
+    (function launchBalloons(){
+      const balloons = document.getElementById('balloons');
+      const colors = ['#ff6b35', '#ff4757', '#3742fa', '#ffa502', '#7bed9f', '#ff3838'];
+      function createBalloon(){
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.style.left = Math.random() * 100 + '%';
+        balloon.style.animationDelay = Math.random() * 10 + 's';
+        balloon.style.background = `radial-gradient(circle at 50% 30%, ${colors[Math.floor(Math.random()*colors.length)]}, #333)`;
+        balloons.appendChild(balloon);
+        setTimeout(() => balloon.remove(), 10000);
+      }
+      // Launch balloons every 15 seconds
+      setInterval(createBalloon, 15000);
+      // Launch a few on load
+      for (let i = 0; i < 5; i++) {
+        setTimeout(createBalloon, i * 2000);
+      }
+    })();
+
+    // Sparkles for New Year
+    (function createSparkles(){
+      const sparkles = document.getElementById('sparkles');
+      for(let i=0; i<30; i++){
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random()*100 + '%';
+        sparkle.style.top = Math.random()*100 + '%';
+        sparkle.style.animationDelay = Math.random()*2 + 's';
+        sparkles.appendChild(sparkle);
+      }
+    })();
   </script>
 
   <!-- Fireworks for New Year -->
   <div class="fireworks" id="fireworks" aria-hidden="true"></div>
+
+  <!-- Balloons for New Year -->
+  <div class="balloons" id="balloons" aria-hidden="true"></div>
+
+  <!-- Sparkles for New Year -->
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
 
 </body>
 
